@@ -1,5 +1,5 @@
 const watson = require('watson-developer-cloud');
-const API_KEY = ; // Put API key here
+const API_KEY = 1b72f2aaaf9d29cd93d4805592c8991c828f9169; // Put API key here
 
 
 // Connect to Watson Alchemy Language service
