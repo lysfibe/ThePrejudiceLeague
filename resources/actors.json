@@ -12,5 +12,12 @@
     "faceY": 0,
     "faceWidth": 0,
     "faceHeight": 0
+  },
+  {
+    "name": "twobass",
+    "faceX": 226,
+    "faceY": 113,
+    "faceWidth": 63,
+    "faceHeight": 70
   }
 ]
