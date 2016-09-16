@@ -47,7 +47,7 @@ function findFace(name) {
  * Gets ACTOR with name
  */
 function findActor(name) {
-    var actor = ACTORS.filter(actor => actor.name = name)[0];
+    var actor = ACTORS.filter(actor => actor.name === name)[0];
     console.log('ACTOR:\n', actor);
     return actor;
 }
@@ -74,7 +74,7 @@ const heroWithFace = (actor, face) => new Promise((resolve, reject) => {
 
             var faceImage = images(path).resize(actor.faceWidth);
 
-            var combined = images(actor.name + '.png').draw(images(faceImage), actor.faceX, actor.faceY);
+            var combined = images(ROOT + '/resources/' + actor.name + '.png').draw(images(faceImage), actor.faceX, actor.faceY);
             console.log('COMB: ', combined);
             resolve(combined);
         },
@@ -97,7 +97,7 @@ const imageFromURL = (url, path) => new Promise((resolve, reject) => {
         });
         file.on('finish', function () {
             console.log('File saved: ', path);
-            resolve();
+            resolve(path);
         });
 
     })
