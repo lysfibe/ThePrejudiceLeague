@@ -19,5 +19,85 @@
     "faceY": 113,
     "faceWidth": 63,
     "faceHeight": 70
+  },
+  {
+    "name": "breadshot",
+    "faceX": 428,
+    "faceY": 116,
+    "faceWidth": 90,
+    "faceHeight": 80
+  },
+  {
+    "name": "captainbirdseye",
+    "faceX": 124,
+    "faceY": 590,
+    "faceWidth": 256,
+    "faceHeight": 115
+  }
+  ,
+  {
+    "name": "captainbirdseye",
+    "faceX": 124,
+    "faceY": 590,
+    "faceWidth": 256,
+    "faceHeight": 115
+  },
+  {
+    "name": "chuggernaut",
+    "faceX": 230,
+    "faceY": 224,
+    "faceWidth": 200,
+    "faceHeight": 200
+  },
+  
+  {
+    "name": "four",
+    "faceX": 295,
+    "faceY": 204,
+    "faceWidth": 60,
+    "faceHeight": 60
+  },
+  {
+    "name": "mrfebreeze",
+    "faceX": 375,
+    "faceY": 256,
+    "faceWidth": 148,
+    "faceHeight": 116
+  }
+  ,
+  {
+    "name": "poker",
+    "faceX": 57,
+    "faceY": 173,
+    "faceWidth": 70,
+    "faceHeight": 90
+  },
+  {
+    "name": "thefiddler",
+    "faceX": 966,
+    "faceY": 336,
+    "faceWidth": 151,
+    "faceHeight": 207
+  },
+  {
+    "name": "theflosh",
+    "faceX": 224,
+    "faceY": 180,
+    "faceWidth": 100,
+    "faceHeight": 115
+  },
+  {
+    "name": "theincrediblepulp",
+    "faceX": 223,
+    "faceY": 143,
+    "faceWidth": 109,
+    "faceHeight": 117
+  },
+  {
+    "name": "twat-man-and-joggin",
+    "faceX": 577,
+    "faceY": 220,
+    "faceWidth": 108,
+    "faceHeight": 144
   }
 ]
