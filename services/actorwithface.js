@@ -5,6 +5,8 @@ const fs = require('fs');
 const imageSearch = require('./imagesearch');
 const ACTORS = require('../resources/actors');
 
+const Jimp = require('jimp')
+
 if (!Array.isArray(ACTORS)) {
     console.error('INVALID ACTORS FILE - MUST BE ARRAY');
 }
@@ -17,11 +19,11 @@ module.exports = function (query) {
     var actor = findActor(query.actorName);
     var result = findFace(query.faceName)
         .then(face => heroWithFace(actor, face))
-        .then(function (combined) {
-            combined.height(query.height)
-            console.log('COMBINED:\n', combined);
-            return combined;
-        })
+        // .then(function (combined) {
+        //     combined.height(query.height)
+        //     console.log('COMBINED:\n', combined);
+        //     return combined;
+        // })
         .catch(function(err){
             console.error(err);
         });
@@ -57,7 +59,7 @@ function findActor(name) {
  * @param actor An element from ACTORS
  * @param face An object with url property
  */
-const heroWithFace = (actor, face) => new Promise((resolve, reject) => {
+const heroWithFace = (actor, face) =>  {
 
     // e.g. {directory}/resources/four-Boris_Jonson.png
 
@@ -69,36 +71,16 @@ const heroWithFace = (actor, face) => new Promise((resolve, reject) => {
         fs.mkdirSync(dir);
     }
 
-    imageFromURL(face.url, facePath).then(
-        function (path) {
 
-            var faceImage = images(path).resize(actor.faceWidth);
-
-            var combined = images(ROOT + '/resources/' + actor.name + '.png').draw(images(faceImage), actor.faceX, actor.faceY);
-            console.log('COMB: ', combined);
-            resolve(combined);
-        },
-        function (err) {
-            reject(err);
-        });
-});
+    return imageFromURL(face.url, actor.faceWidth)
+      .then(
+        face => Jimp
+          .read(ROOT + '/resources/' + actor.name + '.png')
+          .then(act => console.log('facey face', face) || act.composite(face, actor.faceX, actor.faceY))
+      )
+};
 
 /**
  * Gets image from url
  */
-const imageFromURL = (url, path) => new Promise((resolve, reject) => {
-
-    console.log('Getting image: ', url);
-
-    http.get(url, function (res) {
-        var file = fs.createWriteStream(path);
-        http.get(url, function (response) {
-            response.pipe(file);
-        });
-        file.on('finish', function () {
-            console.log('File saved: ', path);
-            resolve(path);
-        });
-
-    })
-});
+const imageFromURL = (url, width) => Jimp.read(url).then(face => face.resize(width, Jimp.AUTO))
