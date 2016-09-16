@@ -22,8 +22,12 @@ router.get('/judge', function (req, res, next) {
 router.get('/actorWithFace', function (req, res, next) {
     actorWithFace(req.query)
         .then(result => {
+
           const stamp = Date.now()
           const path = `./tmp/${stamp}.png`
+          result.write(path)
+          // console.log(result.bitmap)
+          // res.send(result.bitmap.data.toString('base64'))
           result.write(path, (err, r) => {
             const f = fs.createReadStream(path)
             f.pipe(res)

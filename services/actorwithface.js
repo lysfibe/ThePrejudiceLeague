@@ -76,11 +76,11 @@ const heroWithFace = (actor, face) =>  {
       .then(
         face => Jimp
           .read(ROOT + '/resources/' + actor.name + '.png')
-          .then(act => console.log('facey face', face) || act.composite(face, actor.faceX, actor.faceY))
+          .then(act => act.composite(face, actor.faceX, actor.faceY))
       )
 };
 
 /**
  * Gets image from url
  */
-const imageFromURL = (url, width) => Jimp.read(url).then(face => face.resize(width, Jimp.AUTO))
+const imageFromURL = (url, width) => Jimp.read(/(.*)\??/.exec(url)[1]).then(face => face.resize(width, Jimp.AUTO))
