@@ -2,9 +2,10 @@ h1 {
   font-size: 0;
   color: transparent; }
 
-body {
-  text-align: center;
-  background: url("../resources/space.jpg"); }
+body, html {
+  padding: 0;
+  margin: 0;
+  text-align: center; }
 
 input {
   margin-top: 5vh;
@@ -13,9 +14,21 @@ input {
   padding-left: 1vw;
   padding-right: 1vw;
   font-size: 4vh;
-  opacity: 0.2; }
+  opacity: 0.4; }
 
 svg {
-  opacity: 0.2; }
+  opacity: 0.4; }
+
+#container {
+  padding: 0;
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url("../resources/space.jpg"); }
+  #container.entry {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+    align-items: center; }
 
 /*# sourceMappingURL=style.css.map */
