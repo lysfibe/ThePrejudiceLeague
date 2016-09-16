@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>BRIAN ENO</title>
+	</head>
+
+	<body>
+		<img id="eno" />
+
+		<script>
+			var a = new XMLHttpRequest()
+			a.open('GET', '/imagefor/brian_eno', true)
+			a.addEventListener('load', function(e) {
+			console.log(e.target.responseText)
+				document.getElementById('eno').setAttribute('src', e.target.responseText.replace('"', ''))
+			})
+			a.send()
+		</script>
+	</body>
+</html>
