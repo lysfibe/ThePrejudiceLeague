@@ -1,7 +1,22 @@
 h1 {
-    font-family: 'Bungee', cursive;
-    font-size: 20vh;
+    font-size: 0;
+    color: transparent;
 }
 p {
-
+}
+body {
+    text-align: center;
+    background: url('../resources/space.jpg');
+}
+input {
+    margin-top: 5vh;
+    width: 75%;
+    height: 8vh;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    font-size: 4vh;
+    opacity: 0.2;
+}
+svg {
+    opacity: 0.2;
 }
