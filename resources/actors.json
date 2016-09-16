@@ -1,0 +1,16 @@
+[
+  {
+    "name": "testHero",
+    "faceX": 0,
+    "faceY": 0,
+    "faceWidth": 0,
+    "faceHeight": 0
+  },
+  {
+    "name": "testVillain",
+    "faceX": 0,
+    "faceY": 0,
+    "faceWidth": 0,
+    "faceHeight": 0
+  }
+]
