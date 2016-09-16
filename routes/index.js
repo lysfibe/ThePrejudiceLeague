@@ -1,10 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const search = require('../services/imagesearch')
+const judge = require('../services/judge');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+
+router.get('/', function (req, res, next) {
+    res.render('index', {title: 'The Prejudice League'});
+});
+
+router.get('/judge', function (req, res, next) {
+    judge(req.query).then(result => res.json(result));
 });
 
 router.get('/imagefor', (req, res) => res.render('eno', {}))
