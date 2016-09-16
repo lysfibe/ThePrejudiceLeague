@@ -9,7 +9,7 @@ body, html {
     margin: 0;
     text-align: center;
 }
-input {
+input, button {
     margin-top: 5vh;
     width: 75%;
     height: 8vh;
@@ -17,6 +17,9 @@ input {
     padding-right: 1vw;
     font-size: 4vh;
     opacity: 0.4;
+}
+button {
+
 }
 svg {
     opacity: 0.4;
@@ -28,10 +31,15 @@ svg {
         flex-flow: column;
         justify-content: space-around;
         align-items: center;
+        background: url('../resources/space.jpg');
+    }
+    &.fight {
+        background: url('../images/birmingham.jpg');
+        background-size: cover;
+
     }
     padding: 0;
     margin: 0;
     width: 100vw;
     height: 100vh;
-    background: url('../resources/space.jpg');
 }

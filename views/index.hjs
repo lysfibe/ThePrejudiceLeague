@@ -34,7 +34,11 @@
 				</g>
 			</svg>
 			<!-- <p>Verifying indiscreet nationalism and concealment</p> -->
-			<input id="input" type="text" placeholder="Article Url">
+			<div>
+				<input id="input" type="text" placeholder="Article Url">
+				<button id="create-magic" type="button">Create</button>
+			</div>
 		</div>
+		<script src="javascripts/scripts.js"></script>
   </body>
 </html>
