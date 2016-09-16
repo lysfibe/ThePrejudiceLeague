@@ -1,6 +1,7 @@
-const judge = require('../services/judge');
 const express = require('express');
-var router = express.Router();
+const router = express.Router();
+const search = require('../services/imagesearch')
+const judge = require('../services/judge');
 
 /* GET home page. */
 
@@ -11,5 +12,14 @@ router.get('/', function (req, res, next) {
 router.get('/judge', function (req, res, next) {
     judge(req.query).then(result => res.json(result));
 });
+
+router.get('/imagefor', (req, res) => res.render('eno', {}))
+router.get('/imagefor/:term', (req, res) => {
+  search.getFirstUrl(req.params.term)
+    .then(
+      data => res.status(200).send(data),
+      err => res.status(500).json(err)
+    )
+})
 
 module.exports = router;
