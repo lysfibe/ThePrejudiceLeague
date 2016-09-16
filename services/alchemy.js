@@ -16,29 +16,27 @@ if (API_KEY) {
  * Uses the Watson Alchemy API to generate a tag-cloud for target.
  * target should be an object with one of the properties html or url.
  */
-module.exports = function (target) {
-  return new Promise((resolve, reject) => {
-    if (!target || !(target.html || target.url || target.text)) {
-        reject('Could not invoke Alchemy API - No target');
-    }
+module.exports = target => new Promise((resolve, reject) => {
+	if (!target || !(target.html || target.url || target.text)) {
+			reject('Could not invoke Alchemy API - No target');
+	}
 
-    if (!alchemy) {
-        reject('No Alchemy connection');
-    }
+	if (!alchemy) {
+			reject('No Alchemy connection');
+	}
 
-    // Refer to the following link for more information:
-    // http://www.ibm.com/watson/developercloud/alchemy-language/api/v1/?node#entities
-    var parameters = Object.assign({
-      structuredEntities: 0,
-      emotion: 1
-    }, target);
+	// Refer to the following link for more information:
+	// http://www.ibm.com/watson/developercloud/alchemy-language/api/v1/?node#entities
+	var parameters = Object.assign({
+		structuredEntities: 0,
+		emotion: 1
+	}, target);
 
-    // Make API call
-    alchemy.entities(parameters, function(err, res){
-      if (!err && res && Array.isArray(res.entities)) {
-          resolve(res.entities);
-      }
-      reject(err || 'No results');
-    });
-  })
-};
+	// Make API call
+	alchemy.entities(parameters, function(err, res){
+		if (!err && res && Array.isArray(res.entities)) {
+				resolve(res.entities);
+		}
+		reject(err || 'No results');
+	});
+})
