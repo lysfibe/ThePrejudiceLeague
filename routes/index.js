@@ -19,7 +19,9 @@ router.get('/judge', function (req, res, next) {
 
 // query should contain actorName, faceName, height
 router.get('/actorWithFace', function (req, res, next) {
-    actorWithFace(req.query).then(result => res.json(result));
+    actorWithFace(req.query)
+        .then(result => res.json(result))
+        .catch(err => console.error(err || 'UNKNOWN ERROR'));
 });
 
 
