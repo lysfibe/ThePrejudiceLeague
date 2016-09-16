@@ -16,13 +16,14 @@ if (API_KEY) {
  * Uses the Watson Alchemy API to generate a tag-cloud for target.
  * target should be an object with one of the properties html or url.
  */
-module.exports = function (target, callback) {
+module.exports = function (target) {
+  return new Promise((resolve, reject) => {
     if (!target || !(target.html || target.url || target.text)) {
-        return callback('Could not invoke Alchemy API - No target');
+        reject('Could not invoke Alchemy API - No target');
     }
 
     if (!alchemy) {
-        return callback('No Alchemy connection');
+        reject('No Alchemy connection');
     }
 
     // Refer to the following link for more information:
@@ -35,8 +36,9 @@ module.exports = function (target, callback) {
     // Make API call
     alchemy.entities(parameters, function(err, res){
       if (!err && res && Array.isArray(res.entities)) {
-          return callback(null, res.entities);
+          resolve(res.entities);
       }
-      callback(err || 'No results');
+      reject(err || 'No results');
     });
+  })
 };
