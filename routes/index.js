@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const search = require('../services/imagesearch')
+const search = require('../services/imagesearch');
 const judge = require('../services/judge');
 const actorWithFace = require('../services/actorwithface');
+const fs = require('fs');
 
 /* GET home page. */
 
@@ -19,7 +20,15 @@ router.get('/judge', function (req, res, next) {
 
 // query should contain actorName, faceName, height
 router.get('/actorWithFace', function (req, res, next) {
-    actorWithFace(req.query).then(result => res.json(result));
+    actorWithFace(req.query)
+        .then(result => {
+            const stamp = Date.now()
+            const path = `./tmp/${stamp}.png`
+            result.save(path)
+            const f = fs.createReadStream(path)
+            f.pipe(res)
+        })
+        .catch(err => console.error(err || 'UNKNOWN ERROR'));
 });
 
 

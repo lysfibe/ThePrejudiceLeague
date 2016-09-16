@@ -19,8 +19,11 @@ module.exports = function (query) {
         .then(face => heroWithFace(actor, face))
         .then(function (combined) {
             combined.height(query.height)
-            console.log('RESULT:\n', result);
+            console.log('COMBINED:\n', combined);
             return combined;
+        })
+        .catch(function(err){
+            console.error(err);
         });
     return result;
 };
@@ -44,7 +47,7 @@ function findFace(name) {
  * Gets ACTOR with name
  */
 function findActor(name) {
-    var actor = ACTORS.filter(actor => actor.name = name)[0];
+    var actor = ACTORS.filter(actor => actor.name === name)[0];
     console.log('ACTOR:\n', actor);
     return actor;
 }
@@ -57,20 +60,22 @@ function findActor(name) {
 const heroWithFace = (actor, face) => new Promise((resolve, reject) => {
 
     // e.g. {directory}/resources/four-Boris_Jonson.png
-    var facePath = path.join(
-        global.ROOT, 'resources',
-        face.name.replace(' ', '_') + '.' + face.url.split('.').pop());
 
-    console.log('BEFORE');
+    var dir = path.join(global.ROOT, 'resources', 'faces');
+    var fileName = face.name.replace(' ', '_') + '.' + face.url.split('.').pop();
+    var facePath = path.join(dir, fileName);
+
+    if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir);
+    }
 
     imageFromURL(face.url, facePath).then(
         function (path) {
-            console.log('AFTER');
 
             var faceImage = images(path).resize(actor.faceWidth);
 
-            var combined = images(actor.name + '.png').draw(images(faceImage), actor.faceX, actor.faceY);
-
+            var combined = images(ROOT + '/resources/' + actor.name + '.png').draw(images(faceImage), actor.faceX, actor.faceY);
+            console.log('COMB: ', combined);
             resolve(combined);
         },
         function (err) {
@@ -83,16 +88,16 @@ const heroWithFace = (actor, face) => new Promise((resolve, reject) => {
  */
 const imageFromURL = (url, path) => new Promise((resolve, reject) => {
 
-    console.log('HERE');
+    console.log('Getting image: ', url);
 
     http.get(url, function (res) {
         var file = fs.createWriteStream(path);
         http.get(url, function (response) {
             response.pipe(file);
         });
-        file.on('end', function(){
-            console.log('THERE');
-            resolve();
+        file.on('finish', function () {
+            console.log('File saved: ', path);
+            resolve(path);
         });
 
     })
